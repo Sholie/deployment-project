@@ -12,10 +12,21 @@ workflows:
   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+      - node/build:
+        working_directory: ~/cake-calc
+        docker:
+          - image: circleci/node:8
+        steps:
+          - checkout
+          - restore_cache:
+            key: npm-cache-v1-{{ checksum "package-lock.json" }}
+          - run:
+            name: Install Dependencies
+            command: npm ci
+          - save_cache:
+            key: npm-cache-v1-{{ checksum "package-lock.json" }}
+            paths:
+              - /home/circleci/.npm
+          - run:
+            name: Run Tests
+            command: npm test
