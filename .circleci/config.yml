@@ -5,7 +5,6 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 jobs:
   build:
-    working_directory: ~/cake-calc
     docker:
       - image: circleci/node:8
     steps:
