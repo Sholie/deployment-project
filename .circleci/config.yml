@@ -3,9 +3,9 @@ version: 2.1
 
 executors:
   node:
-  docker:
-    - image: circleci/node:14
-  working_directory: ~/cake_app
+    docker:
+      - image: circleci/node:14
+    working_directory: ~/cake_app
 
 
 # Invoke jobs via workflows
@@ -24,9 +24,8 @@ jobs:
   test:
     executor: node
     steps:
-      - run:
-          name: Install Dependencies
-          command: npm ci
+      attach_workspace:
+        at: .
       - run:
           name: Run Tests
           command: npm run test
@@ -36,5 +35,5 @@ workflows:
     jobs:
     - build
     - test:
-      requires:
-        - build
+        requires:
+          - build
