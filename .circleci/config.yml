@@ -1,12 +1,18 @@
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
+executors:
+  node:
+  docker:
+    - image: circleci/node:14
+  working_directory: ~/cake_app
+
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 jobs:
   build:
-    docker:
-      - image: circleci/node:14
+    executor: node
     steps:
       - checkout
       - run:
@@ -16,10 +22,8 @@ jobs:
           name: Build
           command: npm run build
   test:
-    docker:
-      - image: circleci/node:14
+    executor: node
     steps:
-      - checkout
       - run:
           name: Install Dependencies
           command: npm ci
@@ -31,4 +35,6 @@ workflows:
   build_and_test:
     jobs:
     - build
-    - test
+    - test:
+      requires:
+        - build
