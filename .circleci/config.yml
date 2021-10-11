@@ -13,7 +13,7 @@ jobs:
           name: Build
           command: npm run build
   test:
-      docker:
+    docker:
       - image: circleci/node:14
     steps:
       - checkout
