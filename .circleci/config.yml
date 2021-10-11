@@ -24,8 +24,8 @@ jobs:
   test:
     executor: node
     steps:
-      attach_workspace:
-        at: .
+      - attach_workspace:
+          at: .
       - run:
           name: Run Tests
           command: npm run test
