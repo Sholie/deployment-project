@@ -3,9 +3,9 @@ version: 2.1
 
 executors:
   node:
-  docker:
-    - image: circleci/node:14
-  working_directory: ~/cake_app
+    docker:
+      - image: circleci/node:14
+    working_directory: ~/cake_app
 
 
 # Invoke jobs via workflows
