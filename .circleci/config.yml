@@ -6,6 +6,7 @@ executors:
     docker:
       - image: circleci/node:14
     working_directory: ~/cake_app
+    resource_class: small
 
 
 # Invoke jobs via workflows
