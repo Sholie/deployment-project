@@ -37,14 +37,24 @@ jobs:
       - store_artifacts:
           path: ./build
           destination: build/
+  deploy:
+    executor: node
+      - attach_workspace:
+          at: .
+      - run: 
+          name: Deploy Master to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=1//0gSZ1cLBXqiILCgYIARAAGBASNwF-L9IrGI-Pvs69XtIUuLK3lOf3-GzQ71f_rOehCQFB3Mlf9HOoqGzFTja1vvgxl9bn1rcQeRU
 
 workflows:
-  build_and_test:
+  build_test_and_deploy:
     jobs:
     - build
     - test:
         requires:
           - build
     - save:
+        requires:
+          - test
+    - deploy:
         requires:
           - test
