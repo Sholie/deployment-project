@@ -36,7 +36,7 @@ jobs:
           at: .
       - store_artifacts:
           path: ./build
-          destination: build
+          destination: build/
 
 workflows:
   build_and_test:
