@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Build
           command: npm run build
+      - persist_to_workspace:
+          root: ~/cake_app
+          paths: ['.']
   test:
     executor: node
     steps:
