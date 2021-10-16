@@ -33,8 +33,8 @@ function App() {
     <div className="App">
       <Paper className="paper">
         <div className="spacer">
-        <TextField onChange={(event) => setNumber1(Number(event.target.value))}></TextField>
-        <TextField onChange={(event) => setNumber2(Number(event.target.value))}></TextField>
+        <TextField data-testid="number1" onChange={(event) => setNumber1(Number(event.target.value))}></TextField>
+        <TextField data-testid="number2" onChange={(event) => setNumber2(Number(event.target.value))}></TextField>
           </div>
         <br/>
         <br/>
@@ -45,7 +45,7 @@ function App() {
           <Button variant="contained" onClick={() => calculate('/')}>/</Button>
         </div>
         <br/>
-        <Typography>{result}</Typography>
+        <Typography data-testid="result">{result}</Typography>
       </Paper>
     </div>
   );
